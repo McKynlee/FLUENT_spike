@@ -15,3 +15,9 @@ CREATE TABLE "item" (
     "image_url" VARCHAR (2083),
     "user_id" INT REFERENCES "user"
 );
+
+INSERT INTO "item" ("description", "image_url", "user_id")
+VALUES ('A kiwi banana!', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu5yXMQqudjAm72kQvfeLgLY5Zy7BRmO-uYA&usqp=CAU', 1);
+
+INSERT INTO "user" ("username", "password")
+VALUES ('butts', 'butts123!');
