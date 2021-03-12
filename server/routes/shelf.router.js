@@ -92,11 +92,13 @@ router.get('/count', (req, res) => {
 router.get('/:id', (req, res) => {
   // endpoint functionality
   const itemId = req.params.id;
+  const userId = req.user.id;
 
-  const sqlQuery = 'SELECT * FROM "item" WHERE "id" = $1';
+  const sqlQuery =
+    'SELECT * FROM "item" WHERE "item".id = $1 AND "user_id" = $2';
 
   pool
-    .query(sqlQuery, [itemId])
+    .query(sqlQuery, [itemId, userId])
     .then((dbRes) => {
       console.log('GET item by id successful');
       res.send(dbRes.rows);
