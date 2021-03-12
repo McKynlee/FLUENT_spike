@@ -19,6 +19,11 @@ function ShelfPage() {
     <div className="container">
       <h2>Shelf</h2>
       <p>All of the available items can be seen here. test</p>
+      <ul>
+        {shelfItems.map((items) => (
+          <li key={items.id}> {items.description} </li>
+        ))}
+      </ul>
     </div>
   );
 }
