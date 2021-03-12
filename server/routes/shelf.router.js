@@ -7,9 +7,6 @@ const {
 /**
  * Get all of the items on the shelf
  */
-router.get('/', (req, res) => {
-  res.sendStatus(200); // For testing only, can be removed
-});
 router.get('/', rejectUnauthenticated, (req, res) => {
   console.log('isAuthenticated', req.isAuthenticated());
 
@@ -33,8 +30,23 @@ router.get('/', rejectUnauthenticated, (req, res) => {
  * Add an item for the logged in user to the shelf
  */
 router.post('/', (req, res) => {
-  // endpoint functionality
+  const description = req.body.description;
+  const imageUrl = req.body.image_url;
+  const userId = req.user.id;
+
+  const sqlQuery = `INSERT INTO "item" ("description", "image_url", "user_id")
+  VALUES ($1, $2, $3);`;
 });
+
+pool
+  .query(sqlQuery, [description, imageUrl, userId])
+  .then((dbRes) => {
+    console.log('POST successful');
+    res.sendStatus(201);
+  })
+  .catch((err) => {
+    console.error('POST an error occurred', err);
+  });
 
 /**
  * Delete an item if it's something the logged in user added
@@ -71,9 +83,8 @@ router.put('/:id', (req, res) => {
  */
 router.get('/count', (req, res) => {
   const userId = req.user.id;
-  const sqlQuery = `SELECT "item".id, "description", "image_url" FROM "item"
-  JOIN "user" ON "item".user_id = "user".id 
-  WHERE "user".id = $1;`;
+  const sqlQuery = `SELECT "item".id, "description", "image_url", "user_id", "username" FROM "item"
+  JOIN "user" ON "item".user_id = "user".id;`;
 
   pool
     .query(sqlQuery, [userId])
