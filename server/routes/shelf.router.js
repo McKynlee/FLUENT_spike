@@ -78,6 +78,20 @@ router.get('/count', (req, res) => {
  */
 router.get('/:id', (req, res) => {
   // endpoint functionality
+  const itemId = req.params.id;
+
+  const sqlQuery = 'SELECT * FROM "item" WHERE "id" = $1';
+
+  pool
+    .query(sqlQuery, [itemId])
+    .then((dbRes) => {
+      console.log('GET item by id successful');
+      res.send(dbRes.rows);
+    })
+    .catch((err) => {
+      console.error('GET request unsuccessful', err);
+      res.sendStatus(500);
+    });
 });
 
 module.exports = router;
