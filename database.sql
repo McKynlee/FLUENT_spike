@@ -15,3 +15,10 @@ CREATE TABLE "item" (
     "image_url" VARCHAR (2083),
     "user_id" INT REFERENCES "user"
 );
+
+
+INSERT INTO "user" ("username", "password")
+VALUES 
+    -- petLover76 / unicorn123
+    -- admin / topSecret
+    ('fowsia', '$2a$10$s90NWQOLD96j9EogiBa3gOG/OKb9UKVE53K4i5qWPra0Jeg0pp51e'),
