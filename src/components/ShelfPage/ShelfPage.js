@@ -1,12 +1,9 @@
 import axios from 'axios';
 import React from 'react';
 import { useEffect, useState } from "react";
-import { useDispatch } from 'react-redux';
-import {useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
-
-import { useEffect, useState } from 'react';
 
 function ShelfPage() {
 
@@ -20,6 +17,7 @@ function ShelfPage() {
   }, []);
 
   const theBooks = useSelector(store => store.books); // grab from saga.
+  // test
 
 
   const deleteBook = (bookID) => {
