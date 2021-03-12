@@ -16,8 +16,17 @@ CREATE TABLE "item" (
     "user_id" INT REFERENCES "user"
 );
 
+
+
+INSERT INTO "user" ("username", "password")
+VALUES 
+    -- petLover76 / unicorn123
+    -- admin / topSecret
+    ('fowsia', '$2a$10$s90NWQOLD96j9EogiBa3gOG/OKb9UKVE53K4i5qWPra0Jeg0pp51e'),
+
 INSERT INTO "user" ("username", "password")
 VALUES ('butts', 'butts123!');
 
 INSERT INTO "item" ("description", "image_url", "user_id")
 VALUES ('A kiwi banana!', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu5yXMQqudjAm72kQvfeLgLY5Zy7BRmO-uYA&usqp=CAU', 1);
+
