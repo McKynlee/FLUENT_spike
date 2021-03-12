@@ -6,7 +6,10 @@ import {useSelector} from 'react-redux';
 
 
 
+import { useEffect, useState } from 'react';
+
 function ShelfPage() {
+
   const dispatch =useDispatch();
 
    // Get books info on page load
@@ -23,13 +26,11 @@ function ShelfPage() {
     axios.delete(`/api/shelf${bookID}`)
     .then((res) => {
       console.log('successful Delete: ShelfPage', res);
-     
     })
     .catch(error => {
       console.log('error on deleteBook: ShelfPage', error);
     })
   };
-
 
   return (
     <div className="container">
