@@ -70,7 +70,20 @@ router.put('/:id', (req, res) => {
  * they have added to the shelf
  */
 router.get('/count', (req, res) => {
-  // endpoint functionality
+  const userId = req.user.id;
+  const sqlQuery = `SELECT "item".id, "description", "image_url" FROM "item"
+  JOIN "user" ON "item".user_id = "user".id 
+  WHERE "user".id = $1;`;
+
+  pool
+    .query(sqlQuery, [userId])
+    .then((dbRes) => {
+      console.log('GET /count successful');
+      res.send(dbRes.rows);
+    })
+    .catch((err) => {
+      console.error('GET /count an error occurred', err);
+    });
 });
 
 /**
