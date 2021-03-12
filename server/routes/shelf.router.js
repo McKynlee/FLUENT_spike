@@ -41,10 +41,13 @@ router.post('/', (req, res) => {
  */
 router.delete('/:id', (req, res) => {
   const itemId = req.params.id;
+  const userId = req.user.id;
   // access the "item" column to delete where user_id is req.params.id
-  const sqlQuery = 'DELETE FROM "item" WHERE "user_id" = $1';
+
+  const sqlQuery =
+    'DELETE FROM "item" USING "user" WHERE "item".id = $1 AND "user_id" = $2';
   pool
-    .query(sqlQuery, [itemId])
+    .query(sqlQuery, [itemId, userId])
     .then((dbRes) => {
       console.log('DELETE - a response occurred', dbRes);
       res.sendStatus(200);
