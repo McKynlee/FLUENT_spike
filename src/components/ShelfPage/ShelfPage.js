@@ -5,6 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function ShelfPage() {
   const [shelfItems, setShelfItems] = useState([]);
+
+  useEffect(() => {
+    loadShelf();
+  })
+
   const loadShelf = () => {
     // Grab shelf items from db
     axios

@@ -36,17 +36,20 @@ router.post('/', (req, res) => {
 
   const sqlQuery = `INSERT INTO "item" ("description", "image_url", "user_id")
   VALUES ($1, $2, $3);`;
+
+  pool
+    .query(sqlQuery, [description, imageUrl, userId])
+    .then((dbRes) => {
+      console.log('POST successful');
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.error('POST an error occurred', err);
+      res.sendStatus(500);
+    });
 });
 
-pool
-  .query(sqlQuery, [description, imageUrl, userId])
-  .then((dbRes) => {
-    console.log('POST successful');
-    res.sendStatus(201);
-  })
-  .catch((err) => {
-    console.error('POST an error occurred', err);
-  });
+
 
 /**
  * Delete an item if it's something the logged in user added
