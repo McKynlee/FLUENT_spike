@@ -27,14 +27,14 @@ function AboutPage() {
   // useRef hook returns a mutable object with .current property,
   // refs are React's equivalent to the vanillaJS document.querySelector,
   // useRef allows us to keep non-state per-component info around, like the text we want spoken:
-  const inputToSpeak = useRef(true);
+  const inputToSpeak = useRef(null);
 
   // When speak button is clicked, capture text in input area
   // inside inputToSpeak variable:
   const onButtonClick = () => {
-    console.log('on button click, inputToSpeak.current.focus():', inputToSpeak.current.focus());
+    console.log('on button click, inputToSpeak.current:', inputToSpeak.current.value);
     // .current points to the mounted text input element
-    inputToSpeak.current.focus();
+    inputToSpeak.current.value;
   }
 
   return (
@@ -48,12 +48,13 @@ function AboutPage() {
       <section>
         <h1>Simple Text To Speech</h1>
         {/* <p id="warning">Sorry, your browser does not support the Web Speech API.</p> */}
-        <textarea id="txtFld" ref={inputToSpeak}
-        >I love the sound of my computer-generated voice.</textarea>
+        <input ref={inputToSpeak} type="text" />
+        {/* <textarea id="txtFld" ref={inputToSpeak}
+        >I love the sound of my computer-generated voice.</textarea> */}
         <label for="txtFld">Type text above. Then click the Speak button.</label>
         <button type="button" id="speakBtn"
           onClick={onButtonClick}
-        >Speak</button>
+        >Speak (Focus the input)</button>
         <p>Note: For best results on a Mac, use the latest version of Chrome, Safari, or FireFox. On Windows, use Chrome.</p>
       </section>
     </div>
