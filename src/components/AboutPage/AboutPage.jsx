@@ -29,23 +29,32 @@ function AboutPage() {
   // useRef allows us to keep non-state per-component info around, like the text we want spoken:
   const textInput = useRef(null);
 
+
   // Info from Web API for mexican spanish female voice:
-  let paulinasVoice = { id: 48, voiceURI: "Paulina", name: "Paulina", lang: "es-MX", localService: true };
+  // let paulinasVoice = { id: 48, voiceURI: "Paulina", name: "Paulina", lang: "es-MX", localService: true };
 
   // When speak button is clicked, capture text in input area
   // inside inputToSpeak variable:
   const onButtonClick = () => {
     console.log('on button click, inputToSpeak.current:', textInput.current.value);
+
     // .current points to the mounted text input element
     let inputToSpeak = textInput.current.value;
-    // SpeechSynthesis.getVoices()
 
-    let u = new SpeechSynthesisUtterance();
-    // u.voice = paulinasVoice;
-    u.lang = "es-MX";
-    u.text = inputToSpeak;
-    u.rate = 0.7;
-    speechSynthesis.speak(u);
+    let msg = new SpeechSynthesisUtterance();
+    console.log('msg:', msg);
+
+    // LIST OF AVAILABLE VOICES:
+    // speechSynthesis.getVoices().forEach(function (voice) {
+    //   console.log('voice:', voice.name, voice.default ? voice.default : '');
+    // });
+
+    // Specify what voice you want speaking the message:
+    // msg.voice = speechSynthesis.getVoices().filter(function (voice) { return voice.name == 'Paulina'; })[0];
+    msg.lang = "es-MX";
+    msg.rate = 0.8;
+    msg.text = inputToSpeak;
+    speechSynthesis.speak(msg);
   }
 
 
